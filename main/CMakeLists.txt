@@ -1,0 +1,10 @@
+idf_component_register(
+    SRCS
+        "main.c"
+        "drivers/ir_sensor.c"
+        "drivers/servo.c"
+    INCLUDE_DIRS
+        "."
+        "config"
+        "drivers"
+)
