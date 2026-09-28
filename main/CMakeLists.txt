@@ -3,6 +3,7 @@ idf_component_register(
         "main.c"
         "drivers/ir_sensor.c"
         "drivers/servo.c"
+        "drivers/mfrc522.c"
     INCLUDE_DIRS
         "."
         "config"

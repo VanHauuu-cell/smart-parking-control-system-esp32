@@ -1,7 +1,7 @@
 {
     "version":            "1.2",
     "project_name":       "smart_parking",
-    "project_version":    "1",
+    "project_version":    "a6e32db-dirty",
     "project_path":       "E:/Parking System/smart_parking",
     "idf_path":           "E:/esp/Espressif/frameworks/esp-idf-v5.3.3",
     "build_dir":          "E:/Parking System/smart_parking/build",
@@ -1180,7 +1180,7 @@
             "managed_reqs": [],
             "managed_priv_reqs": [],
             "file": "E:/Parking System/smart_parking/build/esp-idf/main/libmain.a",
-            "sources": [ "E:/Parking System/smart_parking/main/main.c", "E:/Parking System/smart_parking/main/drivers/ir_sensor.c", "E:/Parking System/smart_parking/main/drivers/servo.c" ],
+            "sources": [ "E:/Parking System/smart_parking/main/main.c", "E:/Parking System/smart_parking/main/drivers/ir_sensor.c", "E:/Parking System/smart_parking/main/drivers/servo.c", "E:/Parking System/smart_parking/main/drivers/mfrc522.c" ],
             "include_dirs": [ ".", "config", "drivers" ]
         },
         "mbedtls": {

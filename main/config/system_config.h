@@ -8,7 +8,6 @@
 #define SERVO_PWM_FREQ_HZ       50
 #define SERVO_MIN_PULSE_US      540
 #define SERVO_MAX_PULSE_US      2540
-
 #define SERVO_MIN_ANGLE         0
 #define SERVO_MAX_ANGLE         180
 
