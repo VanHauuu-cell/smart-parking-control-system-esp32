@@ -1,35 +1,38 @@
-#include "mfrc522.h"
-#include "esp_log.h"
+#include <string.h>
+
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 
-static const char *TAG = "APP_MAIN";
+#include "esp_log.h"
+#include "esp_err.h"
 
-void app_main(void) {
-    if (mfrc522_init() == ESP_OK) {
-        ESP_LOGI(TAG, "MFRC522 Khoi tao thanh cong!");
-    } else {
-        ESP_LOGE(TAG, "Loi khoi tao MFRC522!");
-        return;
-    }
+#include "uart_driver.h"
 
-    uint8_t tagType[2];
-    uint8_t uid[5];
+static const char *TAG = "CAM_UART_TEST";
 
-    while (1) {
-        // Kiểm tra xem có thẻ không
-        if (mfrc522_request(PICC_CMD_REQA, tagType) == MFRC522_STATUS_OK) {
-            // Nếu có thẻ, đọc UID chống va chạm
-            if (mfrc522_anticoll(uid) == MFRC522_STATUS_OK) {
-                ESP_LOGI(TAG, "Phat hien the! UID: %02X:%02X:%02X:%02X", 
-                         uid[0], uid[1], uid[2], uid[3]);
-                
-                // Tránh đọc liên tục 1 thẻ nhiều lần quá nhanh
-                vTaskDelay(pdMS_TO_TICKS(1000)); 
-            }
+void app_main(void)
+{
+    ESP_ERROR_CHECK(uart_driver_init());
+
+    uint8_t buffer[128];
+
+    while (1)
+    {
+        int length = uart_driver_read(
+            buffer,
+            sizeof(buffer) - 1,
+            1000
+        );
+
+        if (length > 0)
+        {
+            buffer[length] = '\0';
+
+            ESP_LOGI(
+                TAG,
+                "Received: %s",
+                (char *)buffer
+            );
         }
-        
-        // Quét lại sau mỗi 100ms
-        vTaskDelay(pdMS_TO_TICKS(100));
     }
 }
